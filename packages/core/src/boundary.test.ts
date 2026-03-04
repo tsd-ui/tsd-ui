@@ -1,6 +1,8 @@
+/// <reference types="node" />
 import { describe, it, expect } from "vitest";
 import * as fs from "node:fs";
 import * as path from "node:path";
+import { fileURLToPath } from "node:url";
 
 /**
  * Architectural boundary enforcement tests.
@@ -10,6 +12,7 @@ import * as path from "node:path";
  * architecture defined in docs/architecture.md.
  */
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const CORE_SRC = path.resolve(__dirname);
 
 const FORBIDDEN_IMPORTS = [
