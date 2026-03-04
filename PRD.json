@@ -1,0 +1,386 @@
+{
+  "features": [
+    {
+      "id": "F000",
+      "phase": 0,
+      "name": "Monorepo Initialization",
+      "description": "Initialize tsd-ui monorepo with npm workspaces, turborepo, tsup, strict TypeScript configuration",
+      "status": "passes",
+      "dependencies": [],
+      "verificationSteps": [
+        "1. Initialize npm workspace",
+        "2. Configure turbo.json",
+        "3. Configure tsup build pipeline",
+        "4. Enable TypeScript strict mode",
+        "5. Configure ESLint + Prettier"
+      ],
+      "acceptanceCriteria": [
+        "Monorepo builds successfully",
+        "All packages compile with strict TypeScript",
+        "Linting passes",
+        "CI pipeline runs successfully"
+      ],
+      "testingRequirements": {
+        "unit": "Vitest configured and running",
+        "integration": "Workspace cross-package build validation",
+        "e2e": "N/A"
+      },
+      "filesAffected": [
+        "package.json",
+        "turbo.json",
+        "tsconfig.base.json"
+      ],
+      "blockers": [],
+      "notes": "Foundation for internal and upstream packaging."
+    },
+
+    {
+      "id": "F005",
+      "phase": 0,
+      "name": "Pre-commit Hooks (Lint + Format + Typecheck)",
+      "description": "Configure pre-commit hooks to enforce linting, formatting, and type safety before commit",
+      "status": "planned",
+      "dependencies": ["F000"],
+      "verificationSteps": [
+        "1. Install husky",
+        "2. Configure lint-staged",
+        "3. Add ESLint check",
+        "4. Add Prettier formatting",
+        "5. Add TypeScript --noEmit typecheck",
+        "6. Validate commit fails on lint error"
+      ],
+      "acceptanceCriteria": [
+        "Commits blocked if lint fails",
+        "Code auto-formatted on commit",
+        "Type errors block commit"
+      ],
+      "testingRequirements": {
+        "unit": "N/A",
+        "integration": "Manual test: introduce lint error and attempt commit",
+        "e2e": "N/A"
+      },
+      "filesAffected": [".husky/pre-commit", "package.json", ".lintstagedrc"],
+      "blockers": [],
+      "notes": "Prevents style drift and ensures baseline code hygiene."
+    },
+
+    {
+      "id": "F006",
+      "phase": 0,
+      "name": "Pre-push Hooks (Build + Unit Tests)",
+      "description": "Prevent broken builds or failing tests from being pushed",
+      "status": "planned",
+      "dependencies": ["F005"],
+      "verificationSteps": [
+        "1. Add husky pre-push hook",
+        "2. Run npm run build",
+        "3. Run npm test",
+        "4. Confirm push blocked on failure"
+      ],
+      "acceptanceCriteria": [
+        "Push blocked if build fails",
+        "Push blocked if unit tests fail"
+      ],
+      "testingRequirements": {
+        "unit": "Existing unit tests must run",
+        "integration": "Simulate failing test",
+        "e2e": "N/A"
+      },
+      "filesAffected": [".husky/pre-push"],
+      "blockers": [],
+      "notes": "Ensures main branch integrity."
+    },
+
+    {
+      "id": "F007",
+      "phase": 0,
+      "name": "GitHub Actions CI Pipeline",
+      "description": "Implement CI workflow for lint, typecheck, build, and test validation",
+      "status": "planned",
+      "dependencies": ["F000"],
+      "verificationSteps": [
+        "1. Create .github/workflows/ci.yml",
+        "2. Add matrix for Node 18/20/22",
+        "3. Run lint, typecheck, test, build",
+        "4. Enable required status checks on main"
+      ],
+      "acceptanceCriteria": [
+        "CI fails on lint errors",
+        "CI fails on type errors",
+        "CI fails on test failures",
+        "Branch protection requires CI"
+      ],
+      "testingRequirements": {
+        "unit": "Vitest suite runs in CI",
+        "integration": "Full monorepo build in CI",
+        "e2e": "N/A"
+      },
+      "filesAffected": [".github/workflows/ci.yml"],
+      "blockers": [],
+      "notes": "Branch protection must enforce this workflow."
+    },
+
+    {
+      "id": "F008",
+      "phase": 0,
+      "name": "Dependabot Configuration",
+      "description": "Enable automated dependency update PRs",
+      "status": "planned",
+      "dependencies": ["F000"],
+      "verificationSteps": [
+        "1. Create .github/dependabot.yml",
+        "2. Configure weekly updates",
+        "3. Enable security updates",
+        "4. Verify PR auto-created"
+      ],
+      "acceptanceCriteria": [
+        "Dependabot PRs generated",
+        "Security updates flagged",
+        "CI runs on update PRs"
+      ],
+      "testingRequirements": {
+        "unit": "N/A",
+        "integration": "Validate update PR pipeline runs",
+        "e2e": "N/A"
+      },
+      "filesAffected": [".github/dependabot.yml"],
+      "blockers": [],
+      "notes": "Critical for supply-chain hygiene."
+    },
+
+    {
+      "id": "F009",
+      "phase": 0,
+      "name": "CodeQL Security Scanning",
+      "description": "Enable CodeQL static analysis for TypeScript",
+      "status": "planned",
+      "dependencies": ["F000"],
+      "verificationSteps": [
+        "1. Add CodeQL workflow",
+        "2. Enable JS/TS analysis",
+        "3. Validate SARIF results appear in Security tab",
+        "4. Enable PR blocking on high severity issues"
+      ],
+      "acceptanceCriteria": [
+        "CodeQL runs on PRs",
+        "Findings visible in Security tab",
+        "High severity alerts block merge"
+      ],
+      "testingRequirements": {
+        "unit": "N/A",
+        "integration": "Simulate vulnerable dependency",
+        "e2e": "N/A"
+      },
+      "filesAffected": [".github/workflows/codeql.yml"],
+      "blockers": [],
+      "notes": "Aligns with TSD security posture."
+    },
+    {
+      "id": "F001",
+      "phase": 1,
+      "name": "Architectural Boundary Definition",
+      "description": "Define core vs wrapper vs adapter layering to ensure upstream compatibility",
+      "status": "planned",
+      "dependencies": ["F007"],
+      "verificationSteps": [
+        "1. Define core (headless logic) layer",
+        "2. Define PatternFly wrapper layer",
+        "3. Define app adapter strategy",
+        "4. Document architecture in ADR"
+      ],
+      "acceptanceCriteria": [
+        "No app-specific imports in core layer",
+        "Clear separation between logic and UI wrappers",
+        "Architecture documented"
+      ],
+      "testingRequirements": {
+        "unit": "Core layer testable without UI",
+        "integration": "Wrapper layer composes core correctly",
+        "e2e": "N/A"
+      },
+      "filesAffected": [
+        "docs/architecture.md",
+        "packages/core/",
+        "packages/forms/",
+        "packages/table-controls/"
+      ],
+      "blockers": [],
+      "notes": "Prevents undo work if upstream contribution fails."
+    },
+    {
+      "id": "F010",
+      "phase": 2,
+      "name": "Extract HookFormPF Core Components",
+      "description": "Extract HookFormPF components from TPA into @tsd-ui/forms",
+      "status": "planned",
+      "dependencies": ["F001"],
+      "verificationSteps": [
+        "1. Extract HookFormPFGroupController",
+        "2. Extract HookFormPFTextInput",
+        "3. Extract HookFormPFSelect",
+        "4. Extract HookFormPFTextArea",
+        "5. Remove direct TPA imports",
+        "6. Add Storybook examples"
+      ],
+      "acceptanceCriteria": [
+        "Components usable in TAS and TPA",
+        "No project-specific imports",
+        "Type-safe props",
+        "Storybook documentation complete"
+      ],
+      "testingRequirements": {
+        "unit": "Validation logic tests",
+        "integration": "Form integration test with react-hook-form",
+        "e2e": "Manual integration in TAS"
+      },
+      "filesAffected": ["packages/forms/src/HookFormPF/*"],
+      "blockers": [],
+      "notes": "Phase 1 recommended starting point per PRD."
+    },
+    {
+      "id": "F020",
+      "phase": 3,
+      "name": "Extract Core Utility Hooks",
+      "description": "Extract usePersistentState, useStorage, useUrlParams, useDebounce into @tsd-ui/core",
+      "status": "planned",
+      "dependencies": ["F001"],
+      "verificationSteps": [
+        "1. Extract usePersistentState",
+        "2. Extract useStorage",
+        "3. Extract useUrlParams",
+        "4. Extract useDebounce",
+        "5. Ensure no router hard dependency",
+        "6. Add tests"
+      ],
+      "acceptanceCriteria": [
+        "Hooks independent of app context",
+        "URL persistence optional",
+        "Test coverage > 80%"
+      ],
+      "testingRequirements": {
+        "unit": "State persistence tests",
+        "integration": "Simulated router integration",
+        "e2e": "N/A"
+      },
+      "filesAffected": ["packages/core/src/hooks/*"],
+      "blockers": [],
+      "notes": "Core must remain UI-agnostic."
+    },
+
+    // =========================================================
+    // PHASE 4 — TABLE CONTROLS
+    // =========================================================
+
+    {
+      "id": "F030",
+      "phase": 4,
+      "name": "Extract Table Control System",
+      "description": "Extract TPA table-controls (36 files) into @tsd-ui/table-controls with clean API surface",
+      "status": "planned",
+      "dependencies": ["F020"],
+      "verificationSteps": [
+        "1. Extract feature hooks (filtering, sorting, pagination, etc.)",
+        "2. Refactor getHubRequestParams abstraction",
+        "3. Remove TPA-specific logic",
+        "4. Add wrapper utilities for PatternFly Table",
+        "5. Validate bundle size under 50KB gzipped"
+      ],
+      "acceptanceCriteria": [
+        "Works in both TAS and TPA",
+        "No API coupling to Trustify backend",
+        "Clear extension points documented"
+      ],
+      "testingRequirements": {
+        "unit": "Feature hook tests",
+        "integration": "PatternFly table integration test",
+        "e2e": "Manual integration in TPA"
+      },
+      "filesAffected": ["packages/table-controls/src/*"],
+      "blockers": [],
+      "notes": "Most complex extraction. Requires careful decoupling."
+    },
+    {
+      "id": "F040",
+      "phase": 5,
+      "name": "Internal Adoption Validation",
+      "description": "Adopt extracted components in at least two consuming apps",
+      "status": "planned",
+      "dependencies": ["F010", "F020", "F030"],
+      "verificationSteps": [
+        "1. Replace local components in TAS",
+        "2. Replace local components in TPA",
+        "3. Remove deprecated implementations",
+        "4. Run regression testing"
+      ],
+      "acceptanceCriteria": [
+        "Library used by at least two apps",
+        "No regression defects",
+        "No emergency rollback"
+      ],
+      "testingRequirements": {
+        "unit": "N/A",
+        "integration": "App-level integration tests",
+        "e2e": "QA validation"
+      },
+      "filesAffected": ["tas-frontend/*", "tpa-frontend/*"],
+      "blockers": [],
+      "notes": "Gate 1: Internal reuse proven."
+    },
+    {
+      "id": "F050",
+      "phase": 6,
+      "name": "PatternFly Upstream Readiness Assessment",
+      "description": "Evaluate extracted components against PatternFly react-component-groups contribution standards",
+      "status": "planned",
+      "dependencies": ["F040"],
+      "verificationSteps": [
+        "1. Review react-component-groups structure",
+        "2. Align folder conventions",
+        "3. Align prop naming conventions",
+        "4. Align Storybook/doc format",
+        "5. Open draft PR for feedback"
+      ],
+      "acceptanceCriteria": [
+        "Draft PR opened",
+        "Maintainer feedback received",
+        "Clear decision: continue or stop upstream track"
+      ],
+      "testingRequirements": {
+        "unit": "Must pass PatternFly CI",
+        "integration": "Local clone build validation",
+        "e2e": "N/A"
+      },
+      "filesAffected": ["patternfly-react-component-groups/* (external)"],
+      "blockers": ["Maintainer approval"],
+      "notes": "Gate 2: Upstream fit validated."
+    },
+
+    {
+      "id": "F060",
+      "phase": 7,
+      "name": "Upstream Packaging Refactor (Conditional)",
+      "description": "Refactor packaging to meet PatternFly repository requirements if Gate 2 passes",
+      "status": "conditional",
+      "dependencies": ["F050"],
+      "verificationSteps": [
+        "1. Extract PF wrapper layer if required",
+        "2. Align dependency ranges",
+        "3. Remove internal-only utilities",
+        "4. Add PF-standard documentation"
+      ],
+      "acceptanceCriteria": [
+        "PatternFly maintainers approve structure",
+        "CI passes in PF repo",
+        "Component group accepted or staged"
+      ],
+      "testingRequirements": {
+        "unit": "All tests pass",
+        "integration": "Works in PF demo environment",
+        "e2e": "N/A"
+      },
+      "filesAffected": ["patternfly-react-component-groups/*"],
+      "blockers": ["Maintainer approval"],
+      "notes": "If rejected, internal package remains primary distribution."
+    }
+  ]
+}
