@@ -173,7 +173,7 @@
       "phase": 1,
       "name": "Architectural Boundary Definition",
       "description": "Define core vs wrapper vs adapter layering to ensure upstream compatibility",
-      "status": "planned",
+      "status": "passes",
       "dependencies": ["F007"],
       "verificationSteps": [
         "1. Define core (headless logic) layer",
