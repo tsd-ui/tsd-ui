@@ -25,11 +25,7 @@
         "integration": "Workspace cross-package build validation",
         "e2e": "N/A"
       },
-      "filesAffected": [
-        "package.json",
-        "turbo.json",
-        "tsconfig.base.json"
-      ],
+      "filesAffected": ["package.json", "turbo.json", "tsconfig.base.json"],
       "blockers": [],
       "notes": "Foundation for internal and upstream packaging."
     },
@@ -39,7 +35,7 @@
       "phase": 0,
       "name": "Pre-commit Hooks (Lint + Format + Typecheck)",
       "description": "Configure pre-commit hooks to enforce linting, formatting, and type safety before commit",
-      "status": "planned",
+      "status": "passes",
       "dependencies": ["F000"],
       "verificationSteps": [
         "1. Install husky",
@@ -77,10 +73,7 @@
         "3. Run npm test",
         "4. Confirm push blocked on failure"
       ],
-      "acceptanceCriteria": [
-        "Push blocked if build fails",
-        "Push blocked if unit tests fail"
-      ],
+      "acceptanceCriteria": ["Push blocked if build fails", "Push blocked if unit tests fail"],
       "testingRequirements": {
         "unit": "Existing unit tests must run",
         "integration": "Simulate failing test",

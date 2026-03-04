@@ -11,3 +11,16 @@ Completed:
 - All 3 packages build, typecheck, lint, and test successfully
 
 Next task: F005 — Pre-commit Hooks (Lint + Format + Typecheck)
+
+## F005 — Pre-commit Hooks (Lint + Format + Typecheck) [PASSES]
+Date: 2026-03-04
+
+Completed:
+- Installed and initialized husky (v9) with `prepare` script
+- Configured lint-staged (.lintstagedrc) for ESLint --fix + Prettier on TS/TSX, Prettier on other files
+- Pre-commit hook runs lint-staged then npm run typecheck
+- Verified: lint errors block commit (tested with unused variable)
+- Verified: Prettier auto-formats staged files
+- Verified: typecheck runs and blocks on type errors
+
+Next task: F006 — Pre-push Hooks (Build + Unit Tests)
