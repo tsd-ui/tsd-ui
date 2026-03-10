@@ -5,7 +5,7 @@
 
 ## Context
 
-tsd-ui extracts reusable UI components from TPA (Trustification Platform Application) and TAS for shared use across TSD projects, with a potential upstream path to PatternFly react-component-groups. The architecture must enforce clean separation between headless logic and UI-framework-specific wrappers so that:
+tsd-ui extracts reusable UI components from TPA and TAS for shared use across TSD projects, with a potential upstream path to PatternFly `react-component-groups` (or similar). The architecture must enforce clean separation between headless logic and UI-framework-specific wrappers so that:
 
 1. Core logic is testable without any UI framework.
 2. PatternFly wrappers can be contributed upstream without carrying app-specific baggage.
