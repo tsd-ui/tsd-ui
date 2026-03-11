@@ -72,3 +72,20 @@ Completed:
 - High severity alert blocking is configured via GitHub repo settings (Settings > Code security > Code scanning)
 
 Next task: F001 — Architectural Boundary Definition
+
+## F001 — Architectural Boundary Definition [PASSES]
+Date: 2026-03-04
+
+Completed:
+- Defined three-layer architecture: Core (headless) → Wrappers (PF-aware) → App Adapters
+- Created core layer types in @tsd-ui/core: utility types (KeyWithValueType, DisallowCharacters), persistence types, table feature state types (sort, filter, pagination), and ITableControlsAdapter interface
+- Created wrapper layer types in @tsd-ui/forms: IFormGroupWrapperProps, IFormPersistenceOptions extending core
+- Created wrapper layer types in @tsd-ui/table-controls: ITableControlsConfig, ITableControlDerivedState composing core types
+- Added boundary enforcement tests for all 3 packages (scan source files for forbidden imports)
+- Core boundary test validates: no @patternfly, react-dom, @app/, @tackle-ui, or wrapper package imports
+- Wrapper boundary tests validate: no @app/, @tackle-ui, or cross-wrapper imports
+- Added type-level tests with vitest expectTypeOf for all layer contracts
+- Documented architecture in ADR (docs/architecture.md) with layer diagram, import rules, and dependency graph
+- All 29 tests pass across 3 packages
+
+Next task: F010 — Extract HookFormPF Core Components
