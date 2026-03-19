@@ -20,8 +20,11 @@ export const isThemeModeValid = (value: string): value is ThemeMode => {
 };
 
 interface ThemeState {
+  /** The current theme mode selection: "system", "light", or "dark". */
   mode: ThemeMode;
+  /** Updates the theme mode. Invalid values are sanitized to "system". */
   setMode: (mode: ThemeMode) => void;
+  /** Whether the active theme is dark, resolved from the mode and system preference. */
   isDark: boolean;
 }
 
