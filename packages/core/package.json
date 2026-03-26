@@ -22,11 +22,19 @@
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
+    "@patternfly/react-core": "^6.4.0",
+    "@patternfly/react-icons": "^6.4.0",
     "@types/node": "^22.19.15",
     "@types/react": "^18.3.18",
-    "react": "^18.3.1"
+    "@types/react-dom": "^18.3.5",
+    "jsdom": "^29.0.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   },
   "peerDependencies": {
-    "react": "^18.0.0"
+    "@patternfly/react-core": "^6.0.0",
+    "@patternfly/react-icons": "^6.0.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
   }
 }

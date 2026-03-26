@@ -22,3 +22,5 @@ export type {
 export function noop(): void {
   // intentionally empty
 }
+
+export * from "./components/Theme";

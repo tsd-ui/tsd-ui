@@ -24,6 +24,8 @@ const ALLOWED_IMPORTS = [
   "@tsd-ui/core",
   // standard libs & utils
   "react", // React itself is allowed (for types), but not react-dom
+  // Patternfly dependencies
+  "@patternfly/",
 ];
 
 function collectTsFiles(dir: string): string[] {
@@ -81,8 +83,6 @@ describe("architectural boundaries", () => {
       ...pkg.peerDependencies,
     };
 
-    expect(allDeps).not.toHaveProperty("@patternfly/react-core");
     expect(allDeps).not.toHaveProperty("@patternfly/react-table");
-    expect(allDeps).not.toHaveProperty("react-dom");
   });
 });

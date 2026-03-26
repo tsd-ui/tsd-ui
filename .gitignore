@@ -5,3 +5,6 @@ dist/
 .DS_Store
 coverage/
 *.log
+
+.idea/
+managed_context/
