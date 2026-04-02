@@ -1,5 +1,6 @@
 {
   "name": "tsd-ui",
+  "main": "packages/core/src/index.ts",
   "private": true,
   "packageManager": "npm@10.9.2",
   "workspaces": [
