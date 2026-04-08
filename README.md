@@ -1,14 +1,16 @@
 # tsd-ui
 
+Hello world
+
 Shared UI libraries for TSD projects: reusable components and utilities extracted for use across internal apps (for example TPA and TAS), with a long-term goal of upstream alignment with PatternFly-related packages.
 
 ## Packages
 
-| Package | Description |
-| -------- | ----------- |
-| [`@tsd-ui/core`](packages/core) | Shared types, theme context, and headless-oriented building blocks. |
-| [`@tsd-ui/forms`](packages/forms) | Form-related wrappers that compose core logic with React / PatternFly patterns. |
-| [`@tsd-ui/table-controls`](packages/table-controls) | Table control types and adapters (filtering, sorting, pagination). |
+| Package                                             | Description                                                                     |
+| --------------------------------------------------- | ------------------------------------------------------------------------------- |
+| [`@tsd-ui/core`](packages/core)                     | Shared types, theme context, and headless-oriented building blocks.             |
+| [`@tsd-ui/forms`](packages/forms)                   | Form-related wrappers that compose core logic with React / PatternFly patterns. |
+| [`@tsd-ui/table-controls`](packages/table-controls) | Table control types and adapters (filtering, sorting, pagination).              |
 
 Package boundaries and import rules are documented in [`docs/architecture.md`](docs/architecture.md).
 
@@ -27,14 +29,14 @@ npm ci
 
 Run from the repository root (Turborepo orchestrates packages):
 
-| Command | Purpose |
-| -------- | -------- |
-| `npm run build` | Build all packages (`tsup` → `dist/`) |
-| `npm test` | Run Vitest in all packages |
-| `npm run lint` | ESLint across packages |
-| `npm run typecheck` | `tsc --noEmit` per package |
-| `npm run format` | Prettier write |
-| `npm run format:check` | Prettier check |
+| Command                | Purpose                               |
+| ---------------------- | ------------------------------------- |
+| `npm run build`        | Build all packages (`tsup` → `dist/`) |
+| `npm test`             | Run Vitest in all packages            |
+| `npm run lint`         | ESLint across packages                |
+| `npm run typecheck`    | `tsc --noEmit` per package            |
+| `npm run format`       | Prettier write                        |
+| `npm run format:check` | Prettier check                        |
 
 ## Product / planning
 
