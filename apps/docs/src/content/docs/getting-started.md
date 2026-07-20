@@ -31,7 +31,7 @@ npm install @tsd-ui/table-controls
 
 ## Peer dependencies
 
-All packages require **React 18+**. Wrapper packages also require **PatternFly 6**:
+All packages require **React 17+**. Wrapper packages also require **PatternFly 6**:
 
 ```bash
 npm install react react-dom @patternfly/react-core @patternfly/react-icons
