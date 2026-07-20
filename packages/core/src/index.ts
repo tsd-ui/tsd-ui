@@ -25,3 +25,5 @@ export function noop(): void {
 
 export * from "./components/Theme";
 export * from "./components/LoadingWrapper";
+export { createComparator } from "./utils/universalComparator";
+export type { ComparatorOptions } from "./utils/universalComparator";
