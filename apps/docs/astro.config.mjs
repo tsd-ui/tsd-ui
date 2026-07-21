@@ -27,8 +27,17 @@ export default defineConfig({
         {
           label: "Core",
           items: [
-            { label: "Theme", slug: "core/theme" },
-            { label: "LoadingWrapper", slug: "core/loading-wrapper" },
+            {
+              label: "Components",
+              items: [
+                { label: "Theme", slug: "core/components/theme" },
+                { label: "LoadingWrapper", slug: "core/components/loading-wrapper" },
+              ],
+            },
+            {
+              label: "Utils",
+              items: [{ label: "createComparator", slug: "core/utils/universal-comparator" }],
+            },
           ],
         },
         {

@@ -16,8 +16,8 @@ npm install react react-dom @patternfly/react-core @patternfly/react-icons
 
 | Peer | Version |
 |------|---------|
-| `react` | `^18.0.0` |
-| `react-dom` | `^18.0.0` |
+| `react` | `^17.0.0` |
+| `react-dom` | `^17.0.0` |
 | `@patternfly/react-core` | `^6.0.0` |
 | `@patternfly/react-icons` | `^6.0.0` |
 

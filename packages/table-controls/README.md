@@ -18,7 +18,7 @@ npm install react
 
 | Peer | Version |
 |------|---------|
-| `react` | `^18.0.0` |
+| `react` | `^17.0.0` |
 
 ## Exports
 
